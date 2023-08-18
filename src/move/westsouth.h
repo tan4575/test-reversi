@@ -1,0 +1,25 @@
+#pragma once
+#include "../step.h"
+
+class westsouth : public step {
+
+public:
+    westsouth();
+    virtual ~westsouth();
+
+    static westsouth& instance() {
+        if (!_instance)
+        {
+            _instance = new westsouth();
+        }
+        return *_instance;
+    }
+
+    void pre();
+    void execute();
+    void post();
+
+private:
+    static westsouth* _instance;
+
+};
