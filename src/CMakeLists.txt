@@ -6,6 +6,7 @@ set(MOVE_PATH "./move")
 include_directories(move)
 set(SOURCE_FILES main.cpp 
 algo.cpp
+drawboard.cpp
 ${MOVE_PATH}/north.cpp
 ${MOVE_PATH}/east.cpp
 ${MOVE_PATH}/west.cpp

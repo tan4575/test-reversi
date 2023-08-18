@@ -1,3 +1,4 @@
+#pragma once
 #include "north.h"
 #include "east.h"
 #include "west.h"
