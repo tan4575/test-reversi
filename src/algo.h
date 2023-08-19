@@ -12,7 +12,16 @@
 
 class algo{
 public:
+    /**
+     * @brief Construct a new algo object
+     * 
+     */
     algo();
+
+    /**
+     * @brief Destroy the algo object
+     * 
+     */
     virtual ~algo();
 
     static algo& instance() {
@@ -23,10 +32,36 @@ public:
         return *_instance;
     }
 
-    void find(algoMove_t* boardObj);
+    /**
+     * @brief path finding
+     * 
+     * @param boardObj 
+     * @return vi 
+     */
+    vi pathFinding(algoMove_t* boardObj);
 
+    /**
+     * @brief Get the Board With Valid Moves object
+     * 
+     * @param boardObj 
+     * @return algoMove_t* 
+     */
     algoMove_t* getBoardWithValidMoves(algoMove_t* boardObj);
 
+    /**
+     * @brief Get the Valid Move object
+     * 
+     * @param boardObj 
+     * @param x 
+     * @param y 
+     * @return vi* 
+     */
+    vi* getValidMove(const algoMove_t* boardObj, uint8_t x, uint8_t y);
+
+    /**
+     * @brief intances for position
+     * 
+     */
     north n;
     east e;
     west w;
@@ -39,16 +74,27 @@ public:
 private:
     static algo* _instance;
 
-    vi pathFinding(algoMove_t* boardObj);
-
-    vi* isValidMove(const algoMove_t* boardObj, uint8_t x, uint8_t y);
-
+    /**
+     * @brief check for boundary
+     * 
+     * @param boardObj 
+     * @param x 
+     * @param y 
+     * @return true 
+     * @return false 
+     */
     bool checkBoundary(const algoMove_t* boardObj, uint8_t x, uint8_t y)
     {
         return (x >= 0 && x < boardObj->board.size() && 
         y >= 0 && y < boardObj->board.size());
     }
 
+    /**
+     * @brief deep copy
+     * 
+     * @param boardObj 
+     * @return algoMove_t* 
+     */
     algoMove_t* duplicateBoard(const algoMove_t* boardObj);
 
 };

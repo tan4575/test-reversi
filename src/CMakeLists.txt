@@ -5,9 +5,10 @@ set(MOVE_PATH "./move")
 
 include_directories(move)
 set(SOURCE_FILES main.cpp
-step.cpp 
-algo.cpp
 drawboard.cpp
+algo.cpp
+movestep.cpp
+player.cpp
 ${MOVE_PATH}/north.cpp
 ${MOVE_PATH}/east.cpp
 ${MOVE_PATH}/west.cpp

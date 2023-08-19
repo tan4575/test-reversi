@@ -2,25 +2,45 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <iostream>
+#include <cmath>
 using namespace std;
 
 typedef pair<int, int> ii;
 typedef vector<ii> vi;
 typedef vector<char> vii;
 
+enum class TILE : uint8_t
+{
+    X = 0,
+    O = 1,
+    NONE = 2,
+    TIPS = 3,
+};
+
 typedef struct _algoMove
 {
     vector<vii> board;
-    uint8_t x = 0;
-    uint8_t y = 0;
-    uint8_t tile = 0;
+    uint8_t xCount  = 0;
+    uint8_t oCount  = 0;
+    TILE tile = TILE::X;
 }algoMove_t;
+
 
 const char OTHELLO[] = {'X','O',' ', '.'};
 
 class drawboard{
 public:
+    /**
+     * @brief Construct a new drawboard object
+     * 
+     */
     drawboard();
+
+    /**
+     * @brief Destroy the drawboard object
+     * 
+     */
     virtual ~drawboard();
 
     static drawboard& instance() {
@@ -31,16 +51,31 @@ public:
         return *_instance;
     }
 
+    /**
+     * @brief draw board
+     * 
+     * @param board 
+     */
     void draw(vector<vii> board);
 
-    void clear(vector<vii>&board);
+    /**
+     * @brief clear board
+     * 
+     * @param boardobj 
+     */
+    void clear(algoMove_t &boardobj);
 
-    void restart(vector<vii>&board);
+    /**
+     * @brief restart the game
+     * 
+     * @param boardobj 
+     */
+    void restart(algoMove_t &boardobj);
+
+    void update();
 
 private:
     static drawboard* _instance;
-
-
 
 };
 

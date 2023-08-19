@@ -1,10 +1,6 @@
-#include <iostream>
-#include <cmath>
-#include "algo.h"
+#include "drawboard.h"
 
-using namespace std;
-
-const char *LABEL = "    1   2   3   4   5   6   7   8";
+const char *LABEL = "    0   1   2   3   4   5   6   7";
 const char *HLINE = "  +---+---+---+---+---+---+---+---+";
 const char *VLINE = "  |   |   |   |   |   |   |   |   |";
 #define BOARD_SIZE  (8u)
@@ -13,17 +9,29 @@ const char *VLINE = "  |   |   |   |   |   |   |   |   |";
 
 drawboard *drawboard::_instance = nullptr; 
 
+/**
+ * @brief Construct a new drawboard::drawboard object
+ * 
+ */
 drawboard::drawboard()
 {
 
 }
 
+/**
+ * @brief Destroy the drawboard::drawboard object
+ * 
+ */
 drawboard::~drawboard()
 {
 
 }
 
-
+/**
+ * @brief draw
+ * 
+ * @param board 
+ */
 void drawboard::draw(vector<vii> board)
 {
     cout << LABEL << endl;
@@ -31,42 +39,63 @@ void drawboard::draw(vector<vii> board)
     for (int y=0; y < BOARD_SIZE; y++)
     {
         cout << VLINE << endl;
-        cout << y+1 <<  OTHELLO[2];
+        cout << y <<  OTHELLO[(uint8_t)TILE::NONE];
         for (int x=0; x < BOARD_SIZE; x++)
         {
-            cout << "| " << board[x][y] << OTHELLO[2];
+            cout << "| " << board[x][y] << OTHELLO[(uint8_t)TILE::NONE];
         }
-        cout << "|" << endl;
+        cout << "|" << y << endl;
         cout << VLINE << endl;
         cout << HLINE << endl;
     }
-
-
+    cout << LABEL << endl;
 }
 
-void drawboard::clear(vector<vii> &board)
+/**
+ * @brief clear
+ * 
+ * @param board 
+ */
+void drawboard::clear(algoMove_t &boardobj)
 {
-    board.assign(BOARD_SIZE, vii());
-
+    boardobj.board.assign(BOARD_SIZE, vii());
+    boardobj.oCount = 0;
+    boardobj.xCount = 0;
     for (int j=0; j < BOARD_SIZE;j++)
     {
         for (int i=0; i < BOARD_SIZE;i++)
-            board[j].emplace_back(OTHELLO[2]);
+            boardobj.board[j].emplace_back(OTHELLO[(uint8_t)TILE::NONE]);
     }
 
 }
 
-void drawboard::restart(vector<vii> &board)
+/**
+ * @brief restart
+ * 
+ * @param board 
+ */
+void drawboard::restart(algoMove_t &boardobj)
 {
     for (int j=0; j < BOARD_SIZE;j++)
     {
         for (int i=0; i < BOARD_SIZE;i++)
-            board[j][i] = OTHELLO[2];
+            boardobj.board[j][i] = OTHELLO[(uint8_t)TILE::NONE];
     }
 
-    board[POS1][POS1] = OTHELLO[0];
-    board[POS1][POS2] = OTHELLO[1];
-    board[POS2][POS1] = OTHELLO[1];
-    board[POS2][POS2] = OTHELLO[0];
+    boardobj.board[POS1][POS1] = OTHELLO[(uint8_t)TILE::X];
+    boardobj.board[POS1][POS2] = OTHELLO[(uint8_t)TILE::O];
+    boardobj.board[POS2][POS1] = OTHELLO[(uint8_t)TILE::O];
+    boardobj.board[POS2][POS2] = OTHELLO[(uint8_t)TILE::X];
+
+    boardobj.oCount = 2;
+    boardobj.xCount = 2;
+}
+
+/**
+ * @brief upate??
+ * 
+ */
+void drawboard::update()
+{
 
 }

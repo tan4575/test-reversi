@@ -1,7 +1,9 @@
 #pragma once
+#include <vector>
+#include <string>
+#include <unordered_map>
 #include <iostream>
-#include "drawboard.h"
-
+#include <cmath>
 using namespace std;
 
 typedef struct _position
@@ -12,13 +14,28 @@ typedef struct _position
 
 class step {
 public:
+    /**
+     * @brief Construct a new step object
+     * 
+     */
     step() {};
+
+    /**
+     * @brief Destroy the step object
+     * 
+     */
     virtual ~step() {};
+
 
     virtual void pre() = 0;
     virtual void execute() = 0;
     virtual void post() = 0;
 
+    /**
+     * @brief Get the Position object
+     * 
+     * @return position_t 
+     */
     virtual position_t getPosition() const {
         position_t pos;
         return pos;
