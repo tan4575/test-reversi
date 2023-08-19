@@ -1,27 +1,41 @@
 #include "algo.h"
-#include "drawboard.h"
 #include <thread>
 
 void loop (void* arg);
 
 int main(int argc, const char *argv[]) {
 
-  vector<vii> board;
+  // allocate memeory for the board object
+  algoMove_t* boardObj = new algoMove_t;
 
-  ALGO.find();
-  DRAWBOARD.clear(board);
-  DRAWBOARD.restart(board);
-  
-  thread th(loop, (void*)&board);
+  // init board
+  DRAWBOARD.clear(boardObj->board);
+  DRAWBOARD.restart(boardObj->board);
 
-  th.join();
+  // create thread
+  thread th(loop, (void*)boardObj);
 
-  return 0;
+  // wait for the thread to end
+  th.join(); // no return
+
+  // if something wrong
+  return -1;
 }
 
+/**
+ * @brief no return loop
+ * 
+ * @param arg 
+ */
 void loop(void* arg){
 
-  vector<vii>* board = (vector<vii>*)arg;
-  DRAWBOARD.draw(*board);
+  algoMove_t* boardObj = (algoMove_t*)arg;
+  algoMove_t *copyBoard = new algoMove_t;
+  // while (true) {};
+  // ALGO.find(boardObj);
+  // DRAWBOARD.draw(boardObj->board);
+  copyBoard = ALGO.getBoardWithValidMoves(boardObj);
+  DRAWBOARD.draw(copyBoard->board);
+  delete copyBoard;
 
 }

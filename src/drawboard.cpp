@@ -1,6 +1,7 @@
-#include "drawboard.h"
 #include <iostream>
 #include <cmath>
+#include "algo.h"
+
 using namespace std;
 
 const char *LABEL = "    1   2   3   4   5   6   7   8";

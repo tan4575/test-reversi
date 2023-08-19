@@ -18,8 +18,10 @@ public:
     void pre();
     void execute();
     void post();
+    position_t getPosition() const { return pos; };
 
 private:
     static northwest* _instance;
+    const position_t pos = {-1,-1};
 
 };

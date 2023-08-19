@@ -21,5 +21,5 @@ public:
 
 private:
     static westsouth* _instance;
-
+    const position_t pos = {1,-1};
 };

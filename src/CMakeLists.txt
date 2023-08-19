@@ -4,7 +4,8 @@ project(reversi)
 set(MOVE_PATH "./move")
 
 include_directories(move)
-set(SOURCE_FILES main.cpp 
+set(SOURCE_FILES main.cpp
+step.cpp 
 algo.cpp
 drawboard.cpp
 ${MOVE_PATH}/north.cpp

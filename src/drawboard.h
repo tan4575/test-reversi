@@ -1,11 +1,22 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <unordered_map>
 using namespace std;
 
+typedef pair<int, int> ii;
+typedef vector<ii> vi;
 typedef vector<char> vii;
 
-const char OTHELLO[] = {'X','O',' '};
+typedef struct _algoMove
+{
+    vector<vii> board;
+    uint8_t x = 0;
+    uint8_t y = 0;
+    uint8_t tile = 0;
+}algoMove_t;
+
+const char OTHELLO[] = {'X','O',' ', '.'};
 
 class drawboard{
 public:
