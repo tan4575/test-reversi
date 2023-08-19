@@ -95,7 +95,7 @@ position_t player::AIInput(algoMove_t* boardObj){
     vi possibleMoves;
     position_t a = {};
     srand(time(0));
-    possibleMoves = algo.pathFinding(boardObj);
+    possibleMoves = _algo.pathFinding(boardObj);
     random_shuffle( possibleMoves.begin(), possibleMoves.end(), myrandom);
     if (possibleMoves.size() != 0)
     {
@@ -167,7 +167,7 @@ position_t player::humanInput(){
 bool player::makeMove(algoMove_t* boardObj, uint8_t xI, uint8_t yI)
 {
     vi *tilesToFlip = new vi;
-    tilesToFlip = algo.getValidMove(boardObj,xI, yI);
+    tilesToFlip = _algo.getValidMove(boardObj,xI, yI);
     if (tilesToFlip == NULL)
     {
         delete tilesToFlip;

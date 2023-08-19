@@ -81,7 +81,7 @@ public:
      * 
      */
     player():
-    algo(ALGO)
+    _algo(ALGO)
     {
 
     }
@@ -93,7 +93,7 @@ public:
     ~player();
 private:
     TILE tile;
-    algo &algo;
+    algo &_algo;
     PLAYERTYPE playerType;
 
     /**
