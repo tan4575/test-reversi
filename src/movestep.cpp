@@ -123,7 +123,7 @@ uint8_t movestep::random(){
 void movestep::playerInit(algoMove_t* boardObj){
     updatePlayer("COMPUTER","player");
     showTips(boardObj);
-    setStateCallbackFunc(start, this);
+    setStateCallbackFunc(&movestep::start, this);
 }
 
 /**
@@ -143,7 +143,7 @@ void movestep::start(algoMove_t* boardObj){
     else{
         if (haveWinner(boardObj))
         {
-            setStateCallbackFunc(end, this);
+            setStateCallbackFunc(&movestep::end, this);
         }
     }
 
@@ -204,7 +204,7 @@ void movestep::end(algoMove_t* boardObj)
     
     cout << "Hit enter to restart." << endl;
     while ((c = getchar()) != '\n');
-    setStateCallbackFunc(restart,this);
+    setStateCallbackFunc(&movestep::restart,this);
 }
 
 void movestep::restart(algoMove_t* boardObj)
@@ -226,13 +226,13 @@ void movestep::restart(algoMove_t* boardObj)
             players.erase(it);
         }
     }
-    setStateCallbackFunc(playerInit, this);
+    setStateCallbackFunc(&movestep::playerInit, this);
 }
 
 /**
  * @brief set callback function
 */
-void movestep::setStateCallbackFunc(funcCallBack_t callback)
+void movestep::setStateCallbackFunc(funcCallBack_t cb)
 {
-    this->callback = callback;
+    this->callback = cb;
 }

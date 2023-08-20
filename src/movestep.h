@@ -48,7 +48,7 @@ private:
      * 
      */
     movestep():draw(DRAWBOARD) {
-        setStateCallbackFunc(playerInit, this);
+        setStateCallbackFunc(&movestep::playerInit, this);
     };
 
     /**
@@ -120,7 +120,7 @@ private:
      * @brief set state callback function
     */
     template <typename T>
-    void setStateCallbackFunc(void (T::*callback)(algoMove_t *), T *instance);
+    void setStateCallbackFunc(void (T::*callback)(algoMove_t *), T *instance=nullptr);
 
     void setStateCallbackFunc(funcCallBack_t cb);
 
