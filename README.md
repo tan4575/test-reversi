@@ -1,6 +1,8 @@
 # test-reversi
-### Reversi Game
+# System Architecture
+![image](doc/systemArchitecture.png)
 
+### Reversi Game
 ```
 project
 │   README.md
