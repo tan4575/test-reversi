@@ -32,9 +32,6 @@ void loop(void* arg){
 
   algoMove_t* boardObj = (algoMove_t*)arg;
 
-  MOVESTEP.updatePlayer("COMPUTER","player");
-  MOVESTEP.showTips(boardObj);
-
   while (true)
   {
     MOVESTEP.loop(boardObj);

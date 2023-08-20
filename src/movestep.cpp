@@ -9,16 +9,8 @@ movestep *movestep::_instance = nullptr;
  */
 void movestep::loop(algoMove_t* boardObj)
 {
-    cout << "Is: " << turn << " turn" <<endl;
-    boardObj->tile = players[turn]->getTile();
-    position_t pos = players[turn]->input(boardObj);
-    if (players[turn]->makeMove(boardObj,pos.x,pos.y))
-    {
-        turn = players[turn]->getkeys();
-        showTips(boardObj);
-    }
-    cout << "X - score: " << to_string(boardObj->xCount) << endl;
-    cout << "O - score: " << to_string(boardObj->oCount) << endl;
+    if (callback != nullptr) 
+        callback(boardObj);
 }
 
 /**
@@ -117,4 +109,43 @@ uint8_t movestep::random(){
     srand(static_cast<unsigned>(time(nullptr)));
 
     return rand() % 2;
+}
+
+
+/**
+ * @brief palyer init
+ * 
+ * @param boardObj 
+ */
+void movestep::playerInit(algoMove_t* boardObj){
+    updatePlayer("COMPUTER","player");
+    showTips(boardObj);
+    setStateCallbackFunc(start, this);
+}
+
+/**
+ * @brief game start
+ * 
+ * @param boardObj 
+ */
+void movestep::start(algoMove_t* boardObj){
+    cout << "Is: " << turn << " turn" <<endl;
+    boardObj->tile = players[turn]->getTile();
+    position_t pos = players[turn]->input(boardObj);
+    if (players[turn]->makeMove(boardObj,pos.x,pos.y))
+    {
+        turn = players[turn]->getkeys();
+        showTips(boardObj);
+    }
+    cout << "X - score: " << to_string(boardObj->xCount) << endl;
+    cout << "O - score: " << to_string(boardObj->oCount) << endl;
+}
+
+
+/**
+ * @brief set callback function
+*/
+void movestep::setStateCallbackFunc(funcCallBack_t callback)
+{
+    this->callback = callback;
 }

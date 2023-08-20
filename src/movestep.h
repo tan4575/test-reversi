@@ -1,5 +1,9 @@
 #pragma once
 #include "player.h"
+#include <functional>
+
+typedef function<void(algoMove_t*)> funcCallBack_t;
+
 
 class movestep {
 public:
@@ -44,6 +48,7 @@ private:
      * 
      */
     movestep():draw(DRAWBOARD) {
+        setStateCallbackFunc(playerInit, this);
     };
 
     /**
@@ -75,12 +80,40 @@ private:
         return players[playerKey]->getTile();
     }
 
+    /**
+     * @brief init player
+     * 
+     * @param boardObj 
+     */
+    void playerInit(algoMove_t* boardObj);
+
+    /**
+     * @brief start
+     * 
+     * @param boardObj 
+     */
+    void start(algoMove_t* boardObj);
+
+    /**
+     * @brief set state callback function
+    */
+    template <typename T>
+    void setStateCallbackFunc(void (T::*callback)(algoMove_t *), T *instance);
+
+    void setStateCallbackFunc(funcCallBack_t cb);
+
     static movestep *_instance;
     drawboard &draw;
     string turn;
     string playerKey;
     unordered_map<string,base *> players = {};
+    funcCallBack_t callback = nullptr;
 
 };
+
+template <typename T>
+void movestep::setStateCallbackFunc(void (T::*callback)(algoMove_t *), T *instance){
+    setStateCallbackFunc(bind(callback, instance, placeholders::_1));
+}
 
 #define MOVESTEP movestep::instance()
