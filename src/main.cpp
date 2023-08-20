@@ -34,7 +34,8 @@ void loop(void* arg){
 
   while (true)
   {
-    MOVESTEP.loop(boardObj);
+    if (!MOVESTEP.loop(boardObj)) 
+      break;
   }
 
 }

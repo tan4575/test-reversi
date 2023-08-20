@@ -40,7 +40,7 @@ public:
      * 
      * @param boardObj 
      */
-    void loop(algoMove_t* boardObj);
+    bool loop(algoMove_t* boardObj);
 
 private:
     /**

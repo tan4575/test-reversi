@@ -7,10 +7,14 @@ movestep *movestep::_instance = nullptr;
  * 
  * @param boardObj 
  */
-void movestep::loop(algoMove_t* boardObj)
+bool movestep::loop(algoMove_t* boardObj)
 {
     if (callback != nullptr) 
         callback(boardObj);
+    else{
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -135,21 +139,27 @@ void movestep::start(algoMove_t* boardObj){
     cout << "Is: " << turn << " turn" <<endl;
     boardObj->tile = players[turn]->getTile();
     position_t pos = players[turn]->input(boardObj);
-    if (players[turn]->makeMove(boardObj,pos.x,pos.y))
+    if (pos.x >= 0 && pos.y >= 0)
     {
-        turn = players[turn]->getkeys();
-        showTips(boardObj);
+        if (players[turn]->makeMove(boardObj,pos.x,pos.y))
+        {
+            turn = players[turn]->getkeys();
+            showTips(boardObj);
+        }
+        else{
+            if (haveWinner(boardObj))
+            {
+                setStateCallbackFunc(&movestep::end, this);
+            }
+        }
+
+        cout << "X - score: " << to_string(boardObj->xCount) << endl;
+        cout << "O - score: " << to_string(boardObj->oCount) << endl;
     }
     else{
-        if (haveWinner(boardObj))
-        {
-            setStateCallbackFunc(&movestep::end, this);
-        }
+        cout << "Invalid Input!" << endl;
     }
 
-
-    cout << "X - score: " << to_string(boardObj->xCount) << endl;
-    cout << "O - score: " << to_string(boardObj->oCount) << endl;
 }
 
 /**

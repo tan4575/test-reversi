@@ -68,7 +68,7 @@ player::~player()
  */
 position_t player::input(algoMove_t* boardObj)
 {
-    position_t a = {};
+    position_t a = {-1,-1};
     int c;
 
     // if human
@@ -93,7 +93,7 @@ position_t player::input(algoMove_t* boardObj)
  */
 position_t player::AIInput(algoMove_t* boardObj){
     vi possibleMoves;
-    position_t a = {};
+    position_t a = {-1,-1};
     srand(time(0));
     possibleMoves = _algo.pathFinding(boardObj);
     random_shuffle( possibleMoves.begin(), possibleMoves.end(), myrandom);
@@ -121,7 +121,7 @@ position_t player::humanInput(){
     string s = "";
     vector<int> data;
     Node *p = NULL;
-    position_t a = {};
+    position_t a = {-1,-1};
     cout << "Type the x digit (0-7), with a space then the y digit (0-7)" << endl;
     cout << "For example, 0 0 will be the top left corner." << endl;
     while ((c = getchar()) != '\n')
