@@ -47,4 +47,4 @@ cmake . && cmake --build .
 ./src/reversi
 ```
 # Demo
-![image](doc/demo.png)
+![image](doc/demo.PNG)
