@@ -46,4 +46,5 @@ git submodule update --init --recursive
 cmake . && cmake --build .
 ./src/reversi
 ```
-![image](https://github.com/tan4575/test-reversi/assets/30671724/d54800cc-7629-44ad-be75-5c1386f3e4fe)
+# Demo
+![image](doc/demo.png)
