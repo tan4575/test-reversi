@@ -1,0 +1,22 @@
+@startuml
+actor       Player       as A
+
+A -> "reversi()": Start the game
+
+
+"reversi()" -> "thread" : create a No return thread
+
+loop loop()
+    "thread" -> "updatePlayer()" : Create Player info
+    "updatePlayer()" -> "start()": switch state to start
+    "start()" -> "input()": Determine whose turn
+    "input()" -> "makeMove()": Get player/computer input
+    "makeMove()" -> "isMoveValid()": Check for valid move
+    "isMoveValid()" -> "updateScore()": Update score
+    "updateScore()" -> "haveWinner()": look for winner
+    "haveWinner()" -> "restart()": If have winner
+    "haveWinner()" --> "input()": If no winner
+    "restart()" --> "updatePlayer()": restart match
+end
+
+@enduml
