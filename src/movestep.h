@@ -95,6 +95,28 @@ private:
     void start(algoMove_t* boardObj);
 
     /**
+     * @brief Get the Score object
+     * 
+     * @param boardObj 
+     */
+    bool haveWinner(algoMove_t* boardObj);
+
+    /**
+     * @brief end game
+     * 
+     * @param boardObj 
+     * @return true 
+     * @return false 
+     */
+    void end(algoMove_t* boardObj);
+
+    /**
+     * @brief restart
+     * 
+     * @param boardObj 
+     */
+    void restart(algoMove_t* boardObj);
+    /**
      * @brief set state callback function
     */
     template <typename T>

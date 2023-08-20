@@ -163,6 +163,9 @@ algoMove_t* algo::getBoardWithValidMoves(algoMove_t* boardObj)
             copyBoard->board[x][y] = OTHELLO[(uint8_t)TILE::TIPS];
         }
     }
+    else{
+        cout << "Out of Move" << endl;
+    }
     return copyBoard;
 }
 

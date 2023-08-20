@@ -36,9 +36,12 @@ void movestep::updatePlayer(const string p1, const string p2)
     player* instance1 = new player(); //p1
     player* instance2 = new player(); //p2
 
-    
+    instance1->name = _p1;
+    instance2->name = _p2;
+
     instance1->setkeys(_p2);
     instance2->setkeys(_p1);
+
 
     makeplayer[_p1] = instance1;
     makeplayer[_p2] = instance2;
@@ -77,7 +80,7 @@ void movestep::updatePlayer(const string p1, const string p2)
  */
 void movestep::showTips(algoMove_t* boardObj)
 {
-    boardObj->tile = MOVESTEP.getPlayerTile();
+    boardObj->tile = getPlayerTile();
     algoMove_t *copyBoard = new algoMove_t;
     copyBoard = ALGO.getBoardWithValidMoves(boardObj);
     DRAWBOARD.draw(copyBoard->board);
@@ -137,10 +140,94 @@ void movestep::start(algoMove_t* boardObj){
         turn = players[turn]->getkeys();
         showTips(boardObj);
     }
+    else{
+        if (haveWinner(boardObj))
+        {
+            setStateCallbackFunc(end, this);
+        }
+    }
+
+
     cout << "X - score: " << to_string(boardObj->xCount) << endl;
     cout << "O - score: " << to_string(boardObj->oCount) << endl;
 }
 
+/**
+ * @brief find winner if yes return true else false
+ * 
+ * @param boardObj 
+ * @return true 
+ * @return false 
+ */
+bool movestep::haveWinner(algoMove_t* boardObj)
+{
+    vi validMoves = ALGO.pathFinding(boardObj);
+    if (validMoves.size() == 0)
+        return true;
+    return false;
+}
+
+/**
+ * @brief end
+ * 
+ * @param boardObj 
+ * @return true 
+ * @return false 
+ */
+void movestep::end(algoMove_t* boardObj)
+{
+    char c;
+    TILE winTile;
+    cout << "We have a winner!!!" << endl;
+    if (boardObj->oCount != boardObj->xCount)
+    {
+        if (boardObj->oCount > boardObj->xCount)
+        {
+            winTile = TILE::O;
+        }
+        else
+        {
+            winTile = TILE::X;
+        }
+        
+        if (winTile == players[turn]->getTile())
+        {
+            cout << "Winner is " << turn << endl;
+        }
+        else{
+            cout << "Winner is " << players[turn]->getkeys() << endl;
+        }
+    }
+    else{
+        cout << "Tie " << endl;
+    }
+    
+    cout << "Hit enter to restart." << endl;
+    while ((c = getchar()) != '\n');
+    setStateCallbackFunc(restart,this);
+}
+
+void movestep::restart(algoMove_t* boardObj)
+{
+    draw.clear(*boardObj);
+    draw.restart(*boardObj);
+    vector<string> toDelete;
+    for (auto itr = players.begin(); itr != players.end(); ++itr)
+    {
+        toDelete.push_back(itr->first);
+    }
+
+    if (toDelete.size()!=0)
+    {
+        for (auto a: toDelete)
+        {
+            auto it = players.find(a);
+            delete players[a];
+            players.erase(it);
+        }
+    }
+    setStateCallbackFunc(playerInit, this);
+}
 
 /**
  * @brief set callback function

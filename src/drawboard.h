@@ -18,12 +18,20 @@ enum class TILE : uint8_t
     TIPS = 3,
 };
 
+enum class WINNER : uint8_t
+{
+    NONE = 0,
+    PLAYER1 = 1,
+    PLAYER2 = 2,
+};
+
 typedef struct _algoMove
 {
     vector<vii> board;
     uint8_t xCount  = 0;
     uint8_t oCount  = 0;
-    TILE tile = TILE::X;
+    TILE tile       = TILE::X;
+    WINNER runner   = WINNER::NONE;
 }algoMove_t;
 
 

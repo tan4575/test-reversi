@@ -42,7 +42,7 @@ public:
      * @param k 
      */
     void setkeys(string k) {
-        key = k;
+        Oponentkey = k;
     }
 
     /**
@@ -51,7 +51,7 @@ public:
      * @return string 
      */
     string getkeys() {
-        return key;
+        return Oponentkey;
     }
 
     /**
@@ -66,6 +66,7 @@ public:
      */
     virtual ~base() {};
 
+    string name;
 private:
-    string key = "";
+    string Oponentkey = "";
 };
