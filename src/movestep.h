@@ -81,6 +81,12 @@ private:
     }
 
     /**
+     * @brief Get the Player Details object
+     * 
+     */
+    void getPlayerDetails();
+
+    /**
      * @brief init player
      * 
      * @param boardObj 

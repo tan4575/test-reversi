@@ -133,10 +133,50 @@ uint8_t movestep::random(){
  * @param boardObj 
  */
 void movestep::playerInit(algoMove_t* boardObj){
-    updatePlayer("player1","COMPUTER");
+    getPlayerDetails();
     showTips(boardObj);
     setStateCallbackFunc(&movestep::start, this);
 }
+
+/**
+ * @brief get player details
+ * 
+ */
+void movestep::getPlayerDetails(){
+    
+    string options,s1="",s2="";
+    
+    while (options.compare("1") && options.compare("2"))
+    {
+        cout << "Please choose the following options:" << endl;
+        cout << "1. Player vs Player" << endl;
+        cout << "2. Player vs Computer" << endl;
+        cin >> options;
+    }
+
+    cout << "Enter Player 1 Name:" << endl;
+    cin >> s1;
+    switch (options[0])
+    {
+        case '1':
+            do
+            {
+                cout << "Enter Player 2 Name:" << endl;
+                cin >> s2;
+            }while(s1.compare(s2) == 0);
+            updatePlayer(s1,s2);
+            break;
+        case '2':
+            updatePlayer(s1,"COMPUTER");
+            break;
+        default:
+            updatePlayer(s1,"COMPUTER");
+            break;
+    }
+
+}
+
+
 
 /**
  * @brief game start
