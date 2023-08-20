@@ -52,8 +52,16 @@ void movestep::updatePlayer(const string p1, const string p2)
 
     if (_p1.compare("COMPUTER") != 0)
     {
-        instance1->setPlayer(PLAYERTYPE::HUMAN);
-        instance2->setPlayer(PLAYERTYPE::COMPUTER);
+        if (_p2.compare("COMPUTER") == 0)
+        {
+            instance1->setPlayer(PLAYERTYPE::HUMAN);
+            instance2->setPlayer(PLAYERTYPE::COMPUTER);
+        }
+        else{
+            instance1->setPlayer(PLAYERTYPE::HUMAN);
+            instance2->setPlayer(PLAYERTYPE::HUMAN);
+        }
+
         t = instance1->updatePlayertile(_p1);
         instance2->setTile(t);
         playerKey = _p1;
@@ -62,7 +70,7 @@ void movestep::updatePlayer(const string p1, const string p2)
         if (_p2.compare("COMPUTER") == 0)
         {
             instance1->setPlayer(PLAYERTYPE::HUMAN);
-            instance2->setPlayer(PLAYERTYPE::COMPUTER);
+            instance2->setPlayer(PLAYERTYPE::HUMAN);
         }
         else
         {
@@ -125,7 +133,7 @@ uint8_t movestep::random(){
  * @param boardObj 
  */
 void movestep::playerInit(algoMove_t* boardObj){
-    updatePlayer("COMPUTER","player");
+    updatePlayer("player1","COMPUTER");
     showTips(boardObj);
     setStateCallbackFunc(&movestep::start, this);
 }
