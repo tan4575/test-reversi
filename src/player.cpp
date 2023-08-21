@@ -180,6 +180,7 @@ bool player::makeMove(algoMove_t* boardObj, uint8_t xI, uint8_t yI)
     }
     updateScore(boardObj,xI,yI);
     boardObj->board[xI][yI] = OTHELLO[(uint8_t)boardObj->tile];
+    delete tilesToFlip;
     return true;
 }
 
