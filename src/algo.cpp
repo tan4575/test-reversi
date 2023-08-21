@@ -92,9 +92,9 @@ vi * algo::getValidMove(const algoMove_t* boardObj, uint8_t x, uint8_t y)
 
     // to see if you are my enermy?
     if (boardObj->tile == TILE::X)
-        otherTile =  OTHELLO[1];
+        otherTile =  OTHELLO[(uint8_t)TILE::O];
     else
-        otherTile =  OTHELLO[0];
+        otherTile =  OTHELLO[(uint8_t)TILE::X];
 
     // iterate thought E/SE/S/SW/W/NW/N/NE
     for (const auto& [key, instance] : movement)
@@ -136,7 +136,7 @@ vi * algo::getValidMove(const algoMove_t* boardObj, uint8_t x, uint8_t y)
             }
         }
     }
-    board[x][y] = OTHELLO[2];
+    board[x][y] = OTHELLO[(uint8_t)TILE::NONE];
     if (tilesToFlip->size() == 0)
         return NULL;
     return tilesToFlip;
