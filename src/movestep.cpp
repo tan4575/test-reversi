@@ -184,14 +184,15 @@ void movestep::getPlayerDetails(){
  * @param boardObj 
  */
 void movestep::start(algoMove_t* boardObj){
+
+    cout << "Is: " << turn << " turn" <<endl;
+    boardObj->tile = players[turn]->getTile();
+    position_t pos = players[turn]->input(boardObj);
     if (haveWinner(boardObj))
     {
         setStateCallbackFunc(&movestep::end, this);
     }
     else{
-        cout << "Is: " << turn << " turn" <<endl;
-        boardObj->tile = players[turn]->getTile();
-        position_t pos = players[turn]->input(boardObj);
         if (pos.x >= 0 && pos.y >= 0)
         {
             if (players[turn]->makeMove(boardObj,pos.x,pos.y))
