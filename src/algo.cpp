@@ -79,7 +79,7 @@ vi * algo::getValidMove(const algoMove_t* boardObj, uint8_t x, uint8_t y)
     char otherTile;
 
     // check is it in within the boundary and not empty
-    if (!checkBoundary(boardObj, x, y)|| board[x][y] != ' ' )
+    if (!checkBoundary(boardObj, x, y)|| board[x][y] != OTHELLO[(uint8_t)TILE::NONE] )
     {
         delete tilesToFlip;
         return NULL;
