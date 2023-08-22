@@ -83,10 +83,9 @@ private:
      * @return true 
      * @return false 
      */
-    bool checkBoundary(const algoMove_t* boardObj, uint8_t x, uint8_t y)
+    bool checkBoundary(const algoMove_t* boardObj, uint8_t x, uint8_t y) const
     {
-        return (x >= 0 && x < boardObj->board.size() && 
-        y >= 0 && y < boardObj->board.size());
+        return x < boardObj->board.size() && y < boardObj->board.size();
     }
 
     /**

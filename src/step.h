@@ -36,9 +36,6 @@ public:
      * 
      * @return position_t 
      */
-    virtual position_t getPosition() const {
-        position_t pos;
-        return pos;
-    };
+    virtual position_t getPosition() const = 0;
 
 };

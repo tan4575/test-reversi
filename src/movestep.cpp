@@ -29,8 +29,8 @@ void movestep::updatePlayer(const string p1, const string p2)
     unordered_map<string,base *> makeplayer = {};
     TILE t;
 
-    string _p1 = toUpper(p1);
-    string _p2 = toUpper(p2);
+    string _p1 = p1;
+    string _p2 = p2;
 
     if (random() == 0)
         turn = _p1;
@@ -145,6 +145,7 @@ void movestep::playerInit(algoMove_t* boardObj){
 void movestep::getPlayerDetails(){
     
     string options,s1="",s2="";
+    static const string computer = "COMPUTER";
     
     while (options.compare("1") && options.compare("2"))
     {
@@ -154,8 +155,11 @@ void movestep::getPlayerDetails(){
         cin >> options;
     }
 
-    cout << "Enter Player 1 Name:" << endl;
-    cin >> s1;
+    do {
+        cout << "Enter Player 1 Name:" << endl;
+        cin >> s1;
+    }while(computer.compare(s1) == 0);
+
     switch (options[0])
     {
         case '1':
